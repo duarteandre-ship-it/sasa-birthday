@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#120b1f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>🎂</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/three.module.js",
+        "three/addons/": "./vendor/three/addons/",
+        "@sparkjsdev/spark": "./vendor/spark/spark.module.min.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <video id="camera" playsinline muted autoplay hidden></video>
+  <div id="stage"></div>
+
+  <!-- Start: the 3D world is already showing behind this one box. The tap unlocks sound + motion. -->
+  <section id="intro">
+    <button id="startBtn" type="button"></button>
+    <div id="loadBar" hidden><span></span></div>
+  </section>
+
+  <!-- HUD while exploring -->
+  <section id="hud" hidden>
+    <div id="topBar">
+      <div id="progress"><span class="dots"></span><span class="label"></span></div>
+    </div>
+    <canvas id="minimap" width="240" height="240" aria-label="Map"></canvas>
+    <div id="toast"></div>
+    <div id="hintCard" hidden><span class="num"></span><p></p></div>
+
+    <div id="joystick" aria-label="Walk"><div class="ring"></div><div class="knob"></div></div>
+
+    <div id="tools">
+      <button id="stepsBtn" class="tool on" type="button" aria-label="Walk with real steps"><span>👣</span><small>Steps</small></button>
+      <button id="gyroBtn" class="tool on" type="button" aria-label="Look by moving the phone"><span>📱</span><small>Look</small></button>
+      <button id="realBtn" class="tool" type="button" aria-label="Mix with the camera"><span>📷</span><small>Real</small></button>
+    </div>
+  </section>
+
+  <!-- Extra HUD once inside C306 -->
+  <section id="roomHud" hidden>
+    <div id="roomHint"></div>
+    <div id="lyrics"></div>
+    <button id="replayBtn" type="button" aria-label="Play the song again">♫</button>
+    <button id="backBtn" type="button" hidden></button>
+  </section>
+
+  <div id="flash"></div>
+  <div id="portalVeil"></div>
+
+  <!-- Street chaser: jumpscare, then a fake crash. Tap the crash screen to "reboot" into C306. -->
+  <div id="jumpscare" hidden><img alt="" /></div>
+  <div id="crashScreen" hidden>
+    <div class="inner">
+      <div class="sad">:(</div>
+      <p class="big">The experience crashed.</p>
+      <p>FATAL_EXCEPTION 0x5A5A_CAUGHT<br />something reached you before you could get away.</p>
+      <p class="hint">tap to reboot</p>
+    </div>
+  </div>
+  <div id="stepPulse"></div>
+  <div id="error" class="overlay" hidden><div class="card"><p></p></div></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
